@@ -17,27 +17,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'full_name',
+        'username',
         'email',
+        'phone',
         'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at',
+        'updated_at',
+        'deleted_at',
     ];
 }
