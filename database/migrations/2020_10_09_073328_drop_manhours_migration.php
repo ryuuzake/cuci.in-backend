@@ -13,7 +13,7 @@ class DropManhoursMigration extends Migration
      */
     public function up()
     {
-        Schema::dropIfExist('manhours');
+        Schema::dropIfExists('manhours');
     }
 
     /**
