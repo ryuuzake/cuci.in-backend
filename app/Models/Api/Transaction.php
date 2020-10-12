@@ -2,17 +2,16 @@
 
 namespace App\Models\Api;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class Transaction extends Model
+class Transaction extends BaseModel
 {
     protected $fillable = [
         'po_number',
         'address',
         'price',
         'amount',
-        'laundry_types_id',
+        'laundry_type',
         'status',
         'customer_id',
         'outlet_id',
@@ -21,9 +20,13 @@ class Transaction extends Model
         'deleted_at',
     ];
 
-    public function laundryType()
+    public function customer()
     {
-        return $this->belongsTo(LaundryType::class, 'laundry_types_id', 'id');
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
 
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class, 'outlet_id', 'id');
+    }
 }

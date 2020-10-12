@@ -2,21 +2,14 @@
 
 namespace App\Models\Api;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class LaundryType extends Model
+class LaundryType extends BaseModel
 {
     protected $fillable = [
         'name',
-        'price',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
-
-    public function transaction()
-    {
-        return $this->hasMany(Transaction::class, 'laundry_types_id', 'id');
-    }
 }

@@ -21,12 +21,12 @@ Route::group(['prefix' => 'auth'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/logout', 'AuthController@logout');
         Route::get('/info', 'AuthController@user');
-
-        // User
-        Route::get('/user', 'UserController@getAllUser');
-        Route::get('/user/{id}', 'UserController@show');
-        Route::post('/user', 'UserController@store');
-        Route::put('/user/{id}', 'UserController@update');
-        Route::delete('/user/{id}', 'UserController@destroy');
+        
+        // Transaction
+        Route::get('/transaction', 'TransactionController@index');
+        Route::get('/transaction/{transaction}', 'TransactionController@show');
+        Route::post('/transaction', 'TransactionController@store');
+        Route::put('/transaction/{transaction}', 'TransactionController@update');
+        Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
     });
 });
