@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Base\BaseController;
-use App\Http\Controllers\Controller;
-use App\Models\Api\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -36,7 +35,7 @@ class AuthController extends BaseController
 
             $user->save();
             
-            return $this->sendResponse($user, 'User Register Successfully', Response::HTTP_CREATED);
+            return $this->sendResponse('User Register Successfully', Response::HTTP_CREATED, $user);
         } else
             return $isFails;
     }
@@ -63,7 +62,7 @@ class AuthController extends BaseController
             $success['token'] = $user->createToken('Personal Access Token')->accessToken;
             $success['name'] = $user->username;
     
-            return $this->sendResponse($success, 'User Login Successfully', Response::HTTP_OK);
+            return $this->sendResponse('User Login Successfully', Response::HTTP_OK, $success);
         } else
             return $isFails;
     }
@@ -77,6 +76,6 @@ class AuthController extends BaseController
     
     public function user()
     {
-        return $this->sendResponse(Auth::user(), 'Your Personal Account Info', Response::HTTP_OK);
+        return $this->sendResponse('Your Personal Account Info', Response::HTTP_OK, Auth::user());
     }
 }
