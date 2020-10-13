@@ -60,7 +60,7 @@ class TransactionController extends BaseController
                 'po_number' => $transaction_no_format,
                 'address' => $request->address,
                 'laundry_type' => $request->laundry_type,
-                'customer_id' => 1,
+                'customer_id' => Auth::user()->id,
                 'outlet_id' => $request->outlet_id,
             ]);
 
@@ -102,7 +102,7 @@ class TransactionController extends BaseController
      * @param  int  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $transaction)
     {
         $validator = Validator::make($request->all(), [
             'price' => 'required|numeric',
@@ -113,13 +113,13 @@ class TransactionController extends BaseController
         $isFails = $this->isFails($validator);
         
         if ($isFails == false) { 
-            $transaction = Transaction::where('id', $id)->update([
+            $transaction = Transaction::where('id', $transaction)->update([
                 'price' => $request->price,
                 'amount' => $request->amount,
                 'status' => $request->status,
             ]);
 
-            $transaction = Transaction::find($id);
+            $transaction = Transaction::find($transaction);
             
             return $this->sendResponse('Transaction Update Successfully', Response::HTTP_CREATED, $transaction);
         } else

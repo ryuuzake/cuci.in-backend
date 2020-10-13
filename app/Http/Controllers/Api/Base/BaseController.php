@@ -44,7 +44,7 @@ class BaseController extends Controller
     public function isFails($validator)
     {
         if ($validator->fails()) {
-            $erroMsg = 'Validation Error (' . $validator->errors()->first() . ')';
+            $erroMsg = $validator->errors();
             return $this->sendError($erroMsg, Response::HTTP_NOT_FOUND);
         }
 

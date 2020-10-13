@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\Base\BaseController;
 use App\Models\Api\LaundryType;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class LaundryTypeController extends BaseController
@@ -18,11 +17,9 @@ class LaundryTypeController extends BaseController
      */
     public function index()
     {
-        $id = Auth::user()->owner->outlet->id;
-
         $laundry_type = LaundryType::all();
         
-        if ($laundry_type == '[]') 
+        if ($laundry_type == null) 
             return $this->sendError('Laundry Type Empty', Response::HTTP_NOT_FOUND);
 
         return $this->sendResponse('List Laundry Type', Response::HTTP_OK, $laundry_type);
@@ -64,7 +61,7 @@ class LaundryTypeController extends BaseController
     {
         $laundry_type = LaundryType::find($type);
         
-        if ($laundry_type == '[]') 
+        if ($laundry_type == null) 
             return $this->sendError('Laundry Type Unknown', Response::HTTP_NOT_FOUND);
 
         return $this->sendResponse('Show Laundry Type' , Response::HTTP_OK, $laundry_type);
