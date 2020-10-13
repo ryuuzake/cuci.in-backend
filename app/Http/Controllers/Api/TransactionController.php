@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-use function PHPUnit\Framework\isEmpty;
-
 class TransactionController extends BaseController
 {
     /**
@@ -37,7 +35,7 @@ class TransactionController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Transaction in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -74,9 +72,9 @@ class TransactionController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified Transaction.
      *
-     * @param  int  $id
+     * @param  int  $transaction
      * @return \Illuminate\Http\Response
      */
     public function show($transaction)
@@ -98,10 +96,10 @@ class TransactionController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Transaction in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $transaction
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -129,9 +127,9 @@ class TransactionController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Transaction from storage.
      *
-     * @param  int  $id
+     * @param  int  $transaction
      * @return \Illuminate\Http\Response
      */
     public function destroy(Transaction $transaction)

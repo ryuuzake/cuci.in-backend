@@ -28,5 +28,13 @@ Route::group(['prefix' => 'auth'], function () {
         Route::post('/transaction', 'TransactionController@store');
         Route::put('/transaction/{transaction}', 'TransactionController@update');
         Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
+        
+        // Laundry Type
+        Route::get('/laundry/type', 'LaundryTypeController@index');
+        Route::get('/laundry/type/{type}', 'LaundryTypeController@show');
+        Route::post('/laundry/type', 'LaundryTypeController@store');
+        Route::put('/laundry/type/{type}', 'LaundryTypeController@update');
+        Route::delete('/laundry/type/{type}', 'LaundryTypeController@destroy');
+        
     });
 });
