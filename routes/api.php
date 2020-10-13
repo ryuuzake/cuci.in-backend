@@ -36,5 +36,12 @@ Route::group(['prefix' => 'auth'], function () {
         Route::put('/laundry/type/{type}', 'LaundryTypeController@update');
         Route::delete('/laundry/type/{type}', 'LaundryTypeController@destroy');
         
+        // Outlet
+        Route::get('/outlet', 'OutletController@index');
+        Route::get('/outlet/{outlet}', 'OutletController@show');
+        Route::post('/outlet', 'OutletController@store');
+        Route::put('/outlet/{outlet}', 'OutletController@update');
+        Route::delete('/outlet/{outlet}', 'OutletController@destroy');
+        
     });
 });
