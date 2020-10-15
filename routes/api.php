@@ -52,5 +52,7 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/owner', 'OwnerController@index');
         Route::post('/owner', 'OwnerController@store');
         Route::get('/owner/{owner}', 'OwnerController@show');
+        Route::put('/owner/{owner}', 'OwnerController@update');
+        Route::delete('/owner/{owner}', 'OwnerController@destroy');
     });
 });
