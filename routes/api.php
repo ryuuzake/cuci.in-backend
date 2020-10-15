@@ -47,6 +47,8 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/customer', 'CustomerController@index');
         Route::post('/customer', 'CustomerController@store');
         Route::get('/customer/{customer}', 'CustomerController@show');
+        Route::put('/customer/{customer}', 'CustomerController@update');
+        Route::delete('customer/{customer}', 'CustomerController@destroy');
 
         // Owner
         Route::get('/owner', 'OwnerController@index');
