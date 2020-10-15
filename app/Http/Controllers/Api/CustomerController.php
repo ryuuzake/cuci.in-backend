@@ -40,7 +40,7 @@ class CustomerController extends BaseController
     {
         $validator = Validator::make($request->all(), [
             'address' => 'required',
-            'user_id' => 'required'
+            'user_id' => 'required|numeric'
         ]);
 
         $isFails = $this->isFails($validator);
