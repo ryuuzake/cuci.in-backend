@@ -69,7 +69,7 @@ class CustomerController extends BaseController
         $customer = Customer::find($customer);
 
         if($customer == NULL){
-
+            return $this->sendError('Customer Unknown', Response::HTTP_NOT_FOUND);
         }
 
         return $this->sendResponse("show Customer: ", response::HTTP_OK, $customer);
