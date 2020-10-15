@@ -43,5 +43,9 @@ Route::group(['prefix' => 'auth'], function () {
         Route::put('/outlet/{outlet}', 'OutletController@update');
         Route::delete('/outlet/{outlet}', 'OutletController@destroy');
         
+        // Owner
+        Route::get('/owner', 'OwnerController@index');
+        Route::post('/owner', 'OwnerController@store');
+        Route::get('/owner/{owner}', 'OwnerController@show');
     });
 });
