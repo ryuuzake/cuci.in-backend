@@ -17,7 +17,12 @@ class CustomerController extends BaseController
      */
     public function index()
     {
-        //
+         $customer = Customer::all();
+        
+        if ($customer == null) 
+            return $this->sendError('Customer Empty', Response::HTTP_NOT_FOUND);
+
+        return $this->sendResponse('List Customer', Response::HTTP_OK, $customer);
     }
 
     /**
