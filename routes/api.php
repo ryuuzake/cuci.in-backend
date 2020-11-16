@@ -21,7 +21,11 @@ Route::group(['prefix' => 'auth'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/logout', 'AuthController@logout');
         Route::get('/info', 'AuthController@user');
-        
+
+        //User
+        Route::get('/user', 'UserController@getAllUser');
+        Route::get('/user/{user}', 'UserController@showByUsername');
+
         // Transaction
         Route::get('/transaction', 'TransactionController@index');
         Route::get('/transaction/{transaction}', 'TransactionController@show');
@@ -52,5 +56,6 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/owner', 'OwnerController@index');
         Route::post('/owner', 'OwnerController@store');
         Route::get('/owner/{owner}', 'OwnerController@show');
+        Route::get('/owner/user_id/{owner}', 'OwnerController@showByUserId');
     });
 });

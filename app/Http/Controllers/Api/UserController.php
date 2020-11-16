@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\Base\BaseController;
 use App\Http\Controllers\Controller;
@@ -19,10 +19,19 @@ class UserController extends BaseController
      */
     public function getAllUser()
     {
+        /*
         $user = User::all();
         $data = json_decode($user, true);
         
         return $this->sendResponse($data, 'All User Info', Response::HTTP_OK);
+        */
+
+        $user = User::all();
+        
+        if($user == null)
+            return $this->sendError('User Empty', RESPONSE::HTTP_NOT_FOUND);
+
+            return $this->sendResponse('List Owner', Response::HTTP_OK, $user);
     }
 
     /**
@@ -119,5 +128,12 @@ class UserController extends BaseController
         $id->delete();
         
         return $this->sendResponse('User Delete Successfully', Response::HTTP_OK);
+    }
+
+    public function showByUsername($username)
+    {
+        $data = json_decode(User::where('username', $username)->get(), true);
+
+        return $this->sendResponse('User Info', Response::HTTP_OK, $data);
     }
 }
