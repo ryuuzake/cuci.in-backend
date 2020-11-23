@@ -106,7 +106,23 @@ class CustomerController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'address' => 'required',
+            'user_id' => 'required|numeric'
+        ]);
+
+        $isFails = $this->isFails($validator);
+
+        if ($isFails == false) {
+            $customer = Customer::where('id', $id)->update([
+                'address' => $request->address,
+            ]);
+
+            $customer = Customer::find($customer);
+
+            return $this->sendResponse('Customer Update Successfully', Response::HTTP_CREATED, $customer);
+        } else
+            return $isFails;
     }
 
     /**
@@ -115,8 +131,10 @@ class CustomerController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
+
+        return $this->sendResponse('Customer Delete Successfully', Response::HTTP_OK);
     }
 }

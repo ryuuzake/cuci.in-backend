@@ -37,12 +37,52 @@ class OwnerController extends BaseController
             ]);
 
             $owner->save();
-
+          
             return $this->sendResponse('Owner Create Successfully', Response::HTTP_CREATED, $owner);
         } else
             return $isFails;
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $owner)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required|numeric',
+        ]);
+
+        $isFails = $this->isFails($validator);
+        
+        if ($isFails == false) { 
+            $data = Owner::where('id', $owner)->update([
+                'user_id' => $request->user_id,
+            ]);
+
+            $data = Owner::find($owner);
+            
+            return $this->sendResponse('Owner Create Successfully', Response::HTTP_CREATED, $data);
+        } else
+            return $isFails;
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Owner $owner)
+    {
+        $owner->delete();
+        
+        return $this->sendResponse('Owner Delete Successfully', Response::HTTP_OK);
+    }
+  
     public function show($id)
     {
         $data = json_decode(Owner::find($id), true);

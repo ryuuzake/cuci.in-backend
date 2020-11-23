@@ -53,11 +53,15 @@ Route::group(['prefix' => 'auth'], function () {
         Route::post('/customer', 'CustomerController@store');
         Route::get('/customer/{customer}', 'CustomerController@show');
         Route::get('/customer/user/{customer}', 'CustomerController@showCustomerByUserId');
+        Route::put('/customer/{customer}', 'CustomerController@update');
+        Route::delete('customer/{customer}', 'CustomerController@destroy');
 
         // Owner
         Route::get('/owner', 'OwnerController@index');
         Route::post('/owner', 'OwnerController@store');
         Route::get('/owner/{owner}', 'OwnerController@show');
         Route::get('/owner/user_id/{owner}', 'OwnerController@showByUserId');
+        Route::put('/owner/{owner}', 'OwnerController@update');
+        Route::delete('/owner/{owner}', 'OwnerController@destroy');
     });
 });

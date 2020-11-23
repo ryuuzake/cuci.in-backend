@@ -60,7 +60,7 @@ class AuthController extends BaseController
             $user = Auth::user();
             
             $success['token'] = $user->createToken('Personal Access Token')->accessToken;
-            $success['name'] = $user->username;
+            $success['id'] = $user->id;
     
             return $this->sendResponse('User Login Successfully', Response::HTTP_OK, $success);
         } else
