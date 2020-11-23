@@ -29,6 +29,7 @@ Route::group(['prefix' => 'auth'], function () {
         // Transaction
         Route::get('/transaction', 'TransactionController@index');
         Route::get('/transaction/{transaction}', 'TransactionController@show');
+        Route::get('/transaction/{transaction}', 'TransactionController@showTransactionByCustomerId');
         Route::post('/transaction', 'TransactionController@store');
         Route::put('/transaction/{transaction}', 'TransactionController@update');
         Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
@@ -51,6 +52,7 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/customer', 'CustomerController@index');
         Route::post('/customer', 'CustomerController@store');
         Route::get('/customer/{customer}', 'CustomerController@show');
+        Route::get('/customer/user/{customer}', 'CustomerController@showCustomerByUserId');
 
         // Owner
         Route::get('/owner', 'OwnerController@index');

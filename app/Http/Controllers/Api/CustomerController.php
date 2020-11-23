@@ -80,6 +80,12 @@ class CustomerController extends BaseController
         return $this->sendResponse("show Customer: ", response::HTTP_OK, $customer);
     }
 
+    public function showCustomerByUserId($user_id){
+        $data = json_decode(Customer::where('user_id', $user_id)->get(), true);
+
+        return $this->sendResponse('Customer by User Id', Response::HTTP_OK, $data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
