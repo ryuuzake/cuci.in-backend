@@ -95,11 +95,11 @@ class TransactionController extends BaseController
         return $this->sendResponse('Show Transaction' , Response::HTTP_OK, $data);
     }
 
-    public function showTransactionByCustomerId($customer_id){
-        $data = json_decode(Transaction::where('customer_id', $customer_id)->get(), true);
+    // public function showTransactionByCustomerId($customer_id){
+    //     $data = json_decode(Transaction::where('customer_id', $customer_id)->get(), true);
 
-        return $this->sendResponse('Transaction by Customer Id', Response::HTTP_OK, $data);
-    }
+    //     return $this->sendResponse('Transaction by Customer Id', Response::HTTP_OK, $data);
+    // }
 
     /**
      * Display the specified Transaction by User.
