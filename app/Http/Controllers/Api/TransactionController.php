@@ -95,10 +95,29 @@ class TransactionController extends BaseController
         return $this->sendResponse('Show Transaction' , Response::HTTP_OK, $data);
     }
 
-    public function showTransactionByCustomerId($customer_id){
-        $data = json_decode(Transaction::where('customer_id', $customer_id)->get(), true);
+    // public function showTransactionByCustomerId($customer_id){
+    //     $data = json_decode(Transaction::where('customer_id', $customer_id)->get(), true);
 
-        return $this->sendResponse('Transaction by Customer Id', Response::HTTP_OK, $data);
+    //     return $this->sendResponse('Transaction by Customer Id', Response::HTTP_OK, $data);
+    // }
+
+    /**
+     * Display the specified Transaction by User.
+     *
+     * @param  int  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function history($user)
+    {
+        $data = Transaction::with('customer', 'outlet')
+            ->where('customer_id', $user)
+            ->orderBy('created_at')
+            ->get();
+        
+        if ($data == '[]') 
+            return $this->sendError('Transaction Unknown', Response::HTTP_NOT_FOUND);
+
+        return $this->sendResponse('History Transaction' , Response::HTTP_OK, $data);
     }
 
     /**
