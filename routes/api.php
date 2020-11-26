@@ -29,7 +29,7 @@ Route::group(['prefix' => 'auth'], function () {
         // Transaction
         Route::get('/transaction', 'TransactionController@index');
         Route::get('/transaction/{transaction}', 'TransactionController@show');
-        Route::get('/transaction/{transaction}', 'TransactionController@showTransactionByCustomerId');
+        Route::get('/transaction/customer/{transaction}', 'TransactionController@showTransactionByCustomerId');
         Route::post('/transaction', 'TransactionController@store');
         Route::put('/transaction/{transaction}', 'TransactionController@update');
         Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
