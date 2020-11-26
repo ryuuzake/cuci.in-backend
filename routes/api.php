@@ -21,11 +21,16 @@ Route::group(['prefix' => 'auth'], function () {
     Route::group(['middleware' => 'auth:api'], function () {
         Route::get('/logout', 'AuthController@logout');
         Route::get('/info', 'AuthController@user');
-        
+
+        //User
+        Route::get('/user', 'UserController@getAllUser');
+        Route::get('/user/{user}', 'UserController@showByUsername');
+
         // Transaction
         Route::get('/transaction', 'TransactionController@index');
         Route::get('/transaction/{transaction}', 'TransactionController@show');
         Route::get('/transaction/{user}', 'TransactionController@history');
+        // Route::get('/transaction/{transaction}', 'TransactionController@showTransactionByCustomerId');
         Route::post('/transaction', 'TransactionController@store');
         Route::put('/transaction/{transaction}', 'TransactionController@update');
         Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
@@ -48,11 +53,15 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/customer', 'CustomerController@index');
         Route::post('/customer', 'CustomerController@store');
         Route::get('/customer/{customer}', 'CustomerController@show');
+        Route::get('/customer/user/{customer}', 'CustomerController@showCustomerByUserId');
+        Route::put('/customer/{customer}', 'CustomerController@update');
+        Route::delete('customer/{customer}', 'CustomerController@destroy');
 
         // Owner
         Route::get('/owner', 'OwnerController@index');
         Route::post('/owner', 'OwnerController@store');
         Route::get('/owner/{owner}', 'OwnerController@show');
+        Route::get('/owner/user_id/{owner}', 'OwnerController@showByUserId');
         Route::put('/owner/{owner}', 'OwnerController@update');
         Route::delete('/owner/{owner}', 'OwnerController@destroy');
     });

@@ -89,4 +89,11 @@ class OwnerController extends BaseController
 
         return $this->sendResponse('Owner Info', Response::HTTP_OK, $data);
     }
+
+    public function showByUserId($id)
+    {
+        $data = json_decode(Owner::where('user_id', $id)->get(), true);
+
+        return $this->sendResponse('Owner by User Id', Response::HTTP_OK, $data);
+    }
 }
