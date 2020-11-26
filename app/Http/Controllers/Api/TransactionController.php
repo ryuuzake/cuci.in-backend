@@ -96,6 +96,25 @@ class TransactionController extends BaseController
     }
 
     /**
+     * Display the specified Transaction by User.
+     *
+     * @param  int  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function history($user)
+    {
+        $data = Transaction::with('customer', 'outlet')
+            ->where('customer_id', $user)
+            ->orderBy('created_at')
+            ->get();
+        
+        if ($data == '[]') 
+            return $this->sendError('Transaction Unknown', Response::HTTP_NOT_FOUND);
+
+        return $this->sendResponse('History Transaction' , Response::HTTP_OK, $data);
+    }
+
+    /**
      * Update the specified Transaction in storage.
      *
      * @param  \Illuminate\Http\Request  $request
