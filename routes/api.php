@@ -29,12 +29,9 @@ Route::group(['prefix' => 'auth'], function () {
         // Transaction
         Route::get('/transaction', 'TransactionController@index');
         Route::get('/transaction/{transaction}', 'TransactionController@show');
-<<<<<<< HEAD
         Route::get('/transaction/customer/{transaction}', 'TransactionController@showTransactionByCustomerId');
-=======
-        Route::get('/transaction/{user}', 'TransactionController@history');
+        Route::get('/transaction/history/{user}', 'TransactionController@history');
         // Route::get('/transaction/{transaction}', 'TransactionController@showTransactionByCustomerId');
->>>>>>> 61a50be802f295635a41710ae8db2292fb8f9de8
         Route::post('/transaction', 'TransactionController@store');
         Route::put('/transaction/{transaction}', 'TransactionController@update');
         Route::delete('/transaction/{transaction}', 'TransactionController@destroy');
