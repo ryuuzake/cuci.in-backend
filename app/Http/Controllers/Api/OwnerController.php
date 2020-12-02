@@ -94,6 +94,8 @@ class OwnerController extends BaseController
     {
         $data = json_decode(Owner::where('user_id', $id)->get(), true);
 
+        if($data == null)
+            return $this->sendError('Not Registered as Owner', RESPONSE::HTTP_NOT_FOUND);
         return $this->sendResponse('Owner by User Id', Response::HTTP_OK, $data);
     }
 }
