@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Base\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Api\Owner;
 use App\Models\Api\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,9 +20,10 @@ class TransactionController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user)
     {
-        $id = Auth::user()->owner->outlet->id;
+        $user = User::find($user);
+        $id = $user->owner->outlet->id;
 
         $transaction = Transaction::with('customer', 'outlet')
             ->where('outlet_id', $id)

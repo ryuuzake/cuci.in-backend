@@ -27,9 +27,9 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/user/{user}', 'UserController@showByUsername');
 
         // Transaction
-        Route::get('/transaction', 'TransactionController@index');
-        Route::get('/transaction/{transaction}', 'TransactionController@show');
-        Route::get('/transaction/{user}', 'TransactionController@history');
+        Route::get('/transaction/{user}', 'TransactionController@index');
+        Route::get('/transaction/detail/{transaction}', 'TransactionController@show');
+        Route::get('/transaction/customer/{user}', 'TransactionController@history');
         // Route::get('/transaction/{transaction}', 'TransactionController@showTransactionByCustomerId');
         Route::post('/transaction', 'TransactionController@store');
         Route::put('/transaction/{transaction}', 'TransactionController@update');
@@ -64,5 +64,9 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/owner/user_id/{owner}', 'OwnerController@showByUserId');
         Route::put('/owner/{owner}', 'OwnerController@update');
         Route::delete('/owner/{owner}', 'OwnerController@destroy');
+
+        // Outlet
+        Route::get('/outlet/google', 'OutletGoogleController@index');
+        Route::post('/outlet/google', 'OutletGoogleController@store');
     });
 });
