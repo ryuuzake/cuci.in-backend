@@ -83,6 +83,15 @@ class UserController extends BaseController
         return $this->sendResponse($data, 'User Info', Response::HTTP_OK);
     }
 
+    public function showById($id){
+        $user = User::find($id);
+
+        if ($user == null) 
+            return $this->sendError('User Unknown', Response::HTTP_NOT_FOUND);
+
+        return $this->sendResponse('Show User Type', Response::HTTP_OK, $user);
+    }
+
     /**
      * Update the specified resource in storage.
      *
