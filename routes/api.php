@@ -28,10 +28,11 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/user/id/{id}', 'UserController@showById');
 
         // Transaction
-        Route::get('/transaction', 'TransactionController@index');
+        Route::get('/transaction/owner/{userid}', 'TransactionController@index');
         Route::get('/transaction/{transaction}', 'TransactionController@show');
         Route::get('/transaction/customer/{transaction}', 'TransactionController@showTransactionByCustomerId');
         Route::get('/transaction/history/{user}', 'TransactionController@history');
+        Route::get('/transaction/detail/{id}', 'TransactionController@showDataFromId');
         // Route::get('/transaction/{transaction}', 'TransactionController@showTransactionByCustomerId');
         Route::post('/transaction', 'TransactionController@store');
         Route::put('/transaction/{transaction}', 'TransactionController@update');

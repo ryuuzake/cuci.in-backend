@@ -97,6 +97,19 @@ class TransactionController extends BaseController
         return $this->sendResponse('Show Transaction' , Response::HTTP_OK, $data);
     }
 
+    public function showDataFromId($id)
+    {
+        $data = Transaction::with('customer')
+            ->where(
+                'id', $id
+            )
+            ->first();
+        if($data == '[]')
+                return $this->sendError('Transaction Unknown', Response::HTTP_NOT_FOUND);
+        
+        return $this->sendResponse('Show Transaction', Response::HTTP_OK, $data);
+    }
+
     // public function showTransactionByCustomerId($customer_id){
     //     $data = json_decode(Transaction::where('customer_id', $customer_id)->get(), true);
 
