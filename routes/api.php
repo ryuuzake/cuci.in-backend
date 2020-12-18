@@ -28,7 +28,7 @@ Route::group(['prefix' => 'auth'], function () {
         Route::get('/user/id/{id}', 'UserController@showById');
 
         // Transaction
-        Route::get('/transaction', 'TransactionController@index');
+        Route::get('/transaction/owner/{user}', 'TransactionController@index');
         Route::get('/transaction/{transaction}', 'TransactionController@show');
         Route::get('/transaction/customer/{transaction}', 'TransactionController@showTransactionByCustomerId');
         Route::get('/transaction/history/{user}', 'TransactionController@history');
