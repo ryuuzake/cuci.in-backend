@@ -52,7 +52,7 @@ class TransactionController extends BaseController
         $validator = Validator::make($request->all(), [
             'address' => 'required',
             'laundry_type' => 'required|json',
-            'outlet_id' => 'required|numeric',
+            'outlet_id' => 'numeric',
         ]);
 
         $isFails = $this->isFails($validator);
@@ -64,6 +64,7 @@ class TransactionController extends BaseController
                 'laundry_type' => $request->laundry_type,
                 'customer_id' => Auth::user()->id,
                 'outlet_id' => $request->outlet_id,
+                'google_outlet_id' => $request->google_outlet_id,
             ]);
 
             $user->save();
