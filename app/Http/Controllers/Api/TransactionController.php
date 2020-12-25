@@ -52,7 +52,6 @@ class TransactionController extends BaseController
         $validator = Validator::make($request->all(), [
             'address' => 'required',
             'laundry_type' => 'required|json',
-            'outlet_id' => 'numeric',
         ]);
 
         $isFails = $this->isFails($validator);
