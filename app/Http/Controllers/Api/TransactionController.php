@@ -63,7 +63,7 @@ class TransactionController extends BaseController
                 'laundry_type' => $request->laundry_type,
                 'customer_id' => Auth::user()->id,
                 'outlet_id' => $request->outlet_id,
-                'google_outlet_id' => $request->google_outlet_id,
+                'outlet_google_id' => $request->outlet_google_id,
             ]);
 
             $user->save();
