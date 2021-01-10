@@ -67,8 +67,12 @@ Route::group(['prefix' => 'auth'], function () {
         Route::put('/owner/{owner}', 'OwnerController@update');
         Route::delete('/owner/{owner}', 'OwnerController@destroy');
 
-        // Outlet
+        // Outlet Google
         Route::get('/outlet/google', 'OutletGoogleController@index');
         Route::post('/outlet/google', 'OutletGoogleController@store');
+
+        //Apply Mitra
+        Route::post('/partnership/apply', 'PartnershipController@store');
+        Route::get('/partnership/status/{user_id}', 'PartnershipController@status');
     });
 });

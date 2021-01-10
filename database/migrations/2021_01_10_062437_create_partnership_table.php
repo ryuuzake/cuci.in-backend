@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePartnershipTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('partnerships', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('user_id');
+            $table->string('owner_name');
+            $table->string('phone')->unique();
+            $table->string('address');
+            $table->json('laundry_type');
+            $table->string('status')->default('Not Approved');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('partnerships');
+    }
+}
