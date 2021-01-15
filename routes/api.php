@@ -74,5 +74,16 @@ Route::group(['prefix' => 'auth'], function () {
         //Apply Mitra
         Route::post('/partnership/apply', 'PartnershipController@store');
         Route::get('/partnership/status/{user_id}', 'PartnershipController@status');
+
+        //Download Desktop App
+        Route::get('/download', function () {
+            $file = public_path() . "/file/desktop.exe";
+
+            $headers = array(
+                'Content-Type: application/x-msdownload'
+            );
+
+            return response()->download($file, "Cuci-In.exe", $headers);
+        });
     });
 });
