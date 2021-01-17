@@ -77,13 +77,13 @@ Route::group(['prefix' => 'auth'], function () {
 
         //Download Desktop App
         Route::get('/download', function () {
-            $file = public_path() . "/file/desktop.exe";
+            $file = public_path() . "/file/desktop.msi";
 
             $headers = array(
                 'Content-Type: application/x-msdownload'
             );
 
-            return response()->download($file, "Cuci-In.exe", $headers);
+            return response()->download($file, "Cuci-In.msi", $headers);
         });
     });
 });
