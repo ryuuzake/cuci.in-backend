@@ -6,3 +6,12 @@ terraform {
     }
   }
 }
+
+variable "api_token" {}
+
+variable "ssh_fingerprint" {}
+
+variable "pvt_key" {}
+
+variable "pub_key" {}
+
