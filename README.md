@@ -64,8 +64,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 install project dependencies
 composer install
 
-generate jwt key
-php artisan jwt:secret
+generate passpor key
+php artisan passpor:secret
 
 setup .env file from .env.example
 DB_CONNECTION=mysql
