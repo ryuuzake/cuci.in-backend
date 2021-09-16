@@ -60,19 +60,31 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## How To
-install project dependencies
+# cuci.in
+HOW TO SETUP BACKEND
+=========
+
+1. Install project dependencies
+```bash
 composer install
+```
 
-generate passpor key
+2. Generate jwt key
+```bash
 php artisan passpor:secret
+```
 
-setup .env file from .env.example
+3. setup .env file from .env.example
+```bash
 DB_CONNECTION=mysql
+```
 
-seed database
-php artisan db:seed
+4. seed database
+```bash
+php artisan migrate:fresh --seed
+```
 
-laravel artisan serve
+5. laravel artisan serve
+```bash
 php artisan serve
-php artisan migrate --refresh --seed
+```
