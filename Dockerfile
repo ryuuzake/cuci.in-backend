@@ -1,35 +1,38 @@
-FROM composer:2 as vendor
+FROM php:7.4-fpm
 
-COPY . .
+# Set working directory
+WORKDIR /var/www/
 
-RUN composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-progress \
-    --no-dev \
-    --no-scripts \
-    --prefer-dist \
-    && find /app -type d -exec chmod -R 555 {} \; \
-    && find /app -type f -exec chmod -R 444 {} \; \
-    && find /app/storage -type d -exec chmod -R 755 {} \; \
-    && find /app/storage -type f -exec chmod -R 644 {} \;
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    nano
 
-RUN composer dump-autoload
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-FROM existenz/webstack:7.4-codecasts
+# Install PHP extensions
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-EXPOSE 80
-EXPOSE 443
+# Copy project files to default php-fpm www location
+COPY . /var/www
 
-COPY --from=vendor --chown=php:nginx /app /www
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# https://github.com/docker-library/php/issues/240
-# RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing gnu-libiconv
-# ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+# Change permission var/www directory
+RUN chown www-data:www-data /var/www && \
+    chown -R www-data:www-data /var/www/storage* && \
+	chmod -R 775 /var/www/storage/*
 
-RUN apk add \
-    php7 php7-zip php7-json php7-openssl php7-curl \
-    php7-zlib php7-xml php7-phar php7-intl php7-dom php7-xmlreader php7-xmlwriter php7-ctype \
-    php7-mbstring php7-gd php7-session php7-pdo php7-pdo_mysql php7-tokenizer php7-posix \
-    php7-fileinfo php7-opcache php7-cli php7-mcrypt php7-pcntl php7-iconv php7-simplexml
+RUN composer install --no-dev --no-interaction -o
+RUN php artisan key:generate
+RUN php artisan migrate
+RUN php artisan passport:install
+RUN php artisan passport:keys
