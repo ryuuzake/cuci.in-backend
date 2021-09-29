@@ -32,3 +32,20 @@ install migrate from [docker-compose/init_db.sql](./docker-composer/init_db.sql)
 ```bash
 php artisan serve
 ```
+
+HOW TO SETUP USING DOCKER
+===
+
+1. Docker Compose Up
+```bash
+docker-compose up -d
+```
+
+2. Run Following command to configure
+```bash
+docker-compose exec app composer install --no-dev --no-interaction -o
+docker-compose exec app php artisan key:generate
+docker-compose exec app php artisan migrate
+docker-compose exec app php artisan passport:install
+docker-compose exec app php artisan passport:keys
+```

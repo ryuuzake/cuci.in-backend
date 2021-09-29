@@ -24,15 +24,9 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 COPY . /var/www
 
 # Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Change permission var/www directory
 RUN chown www-data:www-data /var/www && \
     chown -R www-data:www-data /var/www/storage* && \
 	chmod -R 775 /var/www/storage/*
-
-RUN composer install --no-dev --no-interaction -o
-RUN php artisan key:generate
-RUN php artisan migrate
-RUN php artisan passport:install
-RUN php artisan passport:keys
